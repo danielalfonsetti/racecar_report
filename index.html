@@ -71,6 +71,75 @@ Bang-Bang Control System Implementation </p>
 <p> Source: http://robohub.org/wp-content/uploads/2014/01/ros101-3.png </p>
 <img src="tree_map.png"/>
 <p> source: http://library.isr.ist.utl.pt/docs/roswiki/attachments/image_transport(2f)Tutorials(2f)ExaminingImagePublisherSubscriber/transport_graph_with_compressed.png </p>
+<p> The above example shows “ROS topics” and “ROS nodes”. ROS topics are places where ROS publishers can publish (send) data to. ROS publishers are said to “talk” to ROS topics. Any node that listens (aka is subscribed to) a ROS topic will receive any data that was published to it. Any given node/program/process that a ROS programmer makes can initialize publishers and subscribers that can publish or subscribe to any number of topics. Each topic can only receive a specific message type (string, Bool, Int32, etc.) </p>
+
+<h2> Control Systems </h2>
+<img src="http://www.dfe.com/resources/faq_openloopvsclosedloop.html"/>
+<p> Source: http://www.dfe.com/resources/faq_openloopvsclosedloop.html </p>
+<img src="https://en.wikipedia.org/wiki/Control_theory#/media/File:Feedback_loop_with_descriptions.svg" />
+<p> https://en.wikipedia.org/wiki/Control_theory#/media/File:Feedback_loop_with_descriptions.svg 
+PID Controller</p>
+<img src="https://en.wikipedia.org/wiki/PID_controller#/media/File:PID_en.svg" />
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1bcb82541c2fd40dd893d3893e04b4d6b1f02330" />
+<p> Source: https://en.wikipedia.org/wiki/PID_controller </p>
+<p>     The study of control systems is very in depth; so much so that people usually only get PhD’s in certain classes of control systems. There are two main classes of control systems: “open-loop” and “closed loop” control systems. Closed loop control systems use sensors to approximate the state of the system and then send the data from the sensors to the controller so that the controller can adjust the system to a desired state. Errors from the sensors in the state approximation of a closed loop system often send the system into a downward spiral since an error to the controller may result in an erroneous action of the system, leading to an even further sensor errors. This is one of the reasons that a lot of research and mathematics has gone into developing these systems. On the other hand, in open loop systems, there is no feedback from the sensors. Source: https://en.wikipedia.org/wiki/Control_system  </p>
+
+<p>     The PID controller is a specific type of closed loop controller. PID stands for Proportional action, Integral action, and Derivative action. 
+    The derivative aspect measures the rate of change of error with respect to time, where the error is the difference between a desired value (aka the “setpoint”) and the value determined by sensor data. If the sensor value approaches the desired value rapidly, the actuator is backed off early so that the error can coast to zero. If the sensor value begins to rapidly move away from the setpoint, then the actuator will work to bring t in proportion to the rate of change in error. For this reason the derivative term in a PID controller is normally negative.
+</p>
+
+<h2> Approach </h2>
+<p>     Although not in the spirit of ROS, we decided that it would be easier to simply have the PID controller and the wall-following mechanism written in a single node since the challenge was relatively simple and there was no real need to delegate severals nodes to multiple people. However, because it was important for everyone to understand what was going, we all sat around one computer, suggesting ideas to be implemented into the node.
+ </p>
+
+<h2>  Process </h2>
+<p>     There were several wall following methods that we tried. We made sure that for each wall following method we made, we made it possible to very easily switch which wall (left or right) the vehicle would follow.
+    Initially we attempted to use the single-point wall following method. What this meant is that we chose a single angle to use from the lidar scan as a reference to find out how far the wall was away from us and then controlled our position away from the wall using the PID. This method, however, is not particularly robust since the robot may not detect curves in the wall that appear in front of the position of the chosen laser screen.
+    Our second attempt involved using a two point wall following method. This method entailed using some basic trigonometry to solve for the distance between the car and the wall. </p>
+
+<h2> Results </h2>
+<p> We found that the two point wall following method worked the best.
+    In the end, we set our chosen distance from the wall at 0.5 meters. We ended up only using a PD controller, with a P value of [] and a D value of []. (Note: Go to windows, get file)
+    In the first week’s final challenge, our car made it to the “Elimination Round” where we ended up losing to car 63. Despite this, we received third of nine in the time trials. </p>
+
+<h1> Week 2 </h1>
+<h2> Technical Goals </h2>
+<p>     Week 2 focused on image processing and computer vision. In this week we were given lectures on thresholding, convolutions, and custom ROS messages. The end of the week challenge for week 2 was to implement a program/programs that would allow the vehicle to differentiate a green sheet of paper from a red sheet of paper and then turn left or right depending on which color it saw. After turning, it would proceed to performing wall following on either a left or right wall (which again was dependent on the color of the paper).  </p>
+<h3> Image Processing and Blob Detection </h3>
+<p>     A blob is defined as a region of an image where the pixels have some property or properties that are constant. There are two different type of blob detectors: differential methods and methods based on local extrema, aka, interest region operators. </p>
+
+<h2> Approach </h2>
+<p>     My group decided to break the task up into three main nodes in addition to the emergency stop node. The architecture for our project looked similar to this: </p>
+<img src="week_2_architecture.png" />
+<p>     In order to launch all of the nodes at once, we created a ros launch file. Ros launch files are a powerful tool that allow for multiple nodes to be started with a single command, allow parameters to be set, and allow for rostopic names to be changed so that rostopic naming conflicts between the set of nodes being launched can be mitigated. </p>
+<h2> Process </h2>
+<p>
+The separate nodes that we decided to split our project up into allowed our group to split up the work among multiple people. It also gave us practice using ROS topics, subscribers, and publishers. 
+</p>
+<p>
+We had some difficulty adjusting our blob detector’s parameters to find the blobs. We also realized the changes in room lighting can affect whether or not the program would detect the blob. In order to find a better range of colors to threshold over, we took a picture of the blob we were trying to detect in the lighting that would be used in the end of the week challenge. We then used a photo editor (gimp) with the image to determine the specific HSV values for the pixels of the blob. We could then edit our blob detector’s parameters accordingly. This method ended up being successful. 
+</p>
+<p>
+Below is the picture we used to find the HSV values of the blob:
+</p>
+<img src="blob_w2.png" />
+<p>
+    The image above also shows the square in which the vehicle is required to make its turn in, ensuring that the vehicle is adequately close to the blob.  The image also shows how the walls are curved, thus testing the robustness of our wall follower.
+</p>
+<h2> Results </h2>
+<p>    Our vehicle sadly was not able to complete the challenge. However, we feel like this was only because we ran out of time to adjust the constants in our code, not because we had major conceptual errors or because we couldn’t implement the concepts correctly.
+</p>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
