@@ -74,15 +74,14 @@ Bang-Bang Control System Implementation </p>
 <p> The above example shows “ROS topics” and “ROS nodes”. ROS topics are places where ROS publishers can publish (send) data to. ROS publishers are said to “talk” to ROS topics. Any node that listens (aka is subscribed to) a ROS topic will receive any data that was published to it. Any given node/program/process that a ROS programmer makes can initialize publishers and subscribers that can publish or subscribe to any number of topics. Each topic can only receive a specific message type (string, Bool, Int32, etc.) </p>
 
 <h2> Control Systems </h2>
-<img src="openvsclosedloop.jpg"/>
+<img src="http://www.dfe.com/resources/faq_openloopvsclosedloop.html"/>
 <p> Source: http://www.dfe.com/resources/faq_openloopvsclosedloop.html </p>
-<img src="400px-Feedback_loop_with_descriptions.svg" />
-<p> Source: https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Feedback_loop_with_descriptions.svg/400px-Feedback_loop_with_descriptions.svg.png
+<img src="https://en.wikipedia.org/wiki/Control_theory#/media/File:Feedback_loop_with_descriptions.svg" />
+<p> https://en.wikipedia.org/wiki/Control_theory#/media/File:Feedback_loop_with_descriptions.svg 
 PID Controller</p>
-<img src="PID_en.svg" />
-<p> Source: https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/PID_en.svg/971px-PID_en.svg.png </p>
+<img src="https://en.wikipedia.org/wiki/PID_controller#/media/File:PID_en.svg" />
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1bcb82541c2fd40dd893d3893e04b4d6b1f02330" />
-<p> Source: https://wikimedia.org/api/rest_v1/media/math/render/svg/1bcb82541c2fd40dd893d3893e04b4d6b1f02330</p>
+<p> Source: https://en.wikipedia.org/wiki/PID_controller </p>
 <p>     The study of control systems is very in depth; so much so that people usually only get PhD’s in certain classes of control systems. There are two main classes of control systems: “open-loop” and “closed loop” control systems. Closed loop control systems use sensors to approximate the state of the system and then send the data from the sensors to the controller so that the controller can adjust the system to a desired state. Errors from the sensors in the state approximation of a closed loop system often send the system into a downward spiral since an error to the controller may result in an erroneous action of the system, leading to an even further sensor errors. This is one of the reasons that a lot of research and mathematics has gone into developing these systems. On the other hand, in open loop systems, there is no feedback from the sensors. Source: https://en.wikipedia.org/wiki/Control_system  </p>
 
 <p>     The PID controller is a specific type of closed loop controller. PID stands for Proportional action, Integral action, and Derivative action. 
@@ -132,7 +131,13 @@ Below is the picture we used to find the HSV values of the blob:
     The image above also shows the square in which the vehicle is required to make its turn in, ensuring that the vehicle is adequately close to the blob.  The image also shows how the walls are curved, thus testing the robustness of our wall follower.
 </p>
 <h2> Results </h2>
-<p>    Our vehicle sadly was not able to complete the challenge. However, we feel like this was only because we ran out of time to adjust the constants in our code, not because we had major conceptual errors or because we couldn’t implement the concepts correctly. </p>
+<p>    Our vehicle sadly was not able to complete the challenge. However, we feel like this was only because we ran out of time to adjust the constants in our code, not because we had major conceptual errors or because we couldn’t implement the concepts correctly.
+</p>
+
+
+
+
+
 
 <h1> Week 3 </h1>
 <h2> Technical Goals </h2>
@@ -155,6 +160,15 @@ The potential fields algorithm is simply trying to mimic the physics of the real
 <h2> Approach </h2>
 <p>     In order to detect the images, my team made openCV templates of the above images and then compared them to the images that were streaming from the zed camera. Our car explored the environment and avoided obstacles using a potential field algorithm. </p>
 
+<h2> Process </h2>
+<p> 
+
+
+
+
+</p>
+
+
 <h2> Results </h2>
 <p> Our team was not able to successfully implement the image detection. However, we were able to implement blob detection which included reporting the shape and color of the blobs. Unfortunately, our group was not able to participate in the end of the week challenge because there were delays in the schedule and our team was scheduled for the last place. </p>
 
@@ -173,6 +187,13 @@ The potential fields algorithm is simply trying to mimic the physics of the real
 <h2> Approach </h2>
 <p>
 	For all three challenges, we used potential fields as our main navigation algorithm. For tech challenge 2 and the corresponding part in the grand prix, we would over ride the potential field algorithm for a few seconds with a hard coded stirring message in order to turn right if we saw a red blob. 
+</p>
+
+
+<h2> Process </h2>
+<p>
+
+
 </p>
 
 <h2> Results </h2>
