@@ -74,12 +74,12 @@ Bang-Bang Control System Implementation </p>
 <p> The above example shows “ROS topics” and “ROS nodes”. ROS topics are places where ROS publishers can publish (send) data to. ROS publishers are said to “talk” to ROS topics. Any node that listens (aka is subscribed to) a ROS topic will receive any data that was published to it. Any given node/program/process that a ROS programmer makes can initialize publishers and subscribers that can publish or subscribe to any number of topics. Each topic can only receive a specific message type (string, Bool, Int32, etc.) </p>
 
 <h2> Control Systems </h2>
-<img src="http://www.dfe.com/resources/faq_openloopvsclosedloop.html"/>
+<img src="http://www.dfe.com/photos/openvsclosedloop.jpg"/>
 <p> Source: http://www.dfe.com/resources/faq_openloopvsclosedloop.html </p>
-<img src="https://en.wikipedia.org/wiki/Control_theory#/media/File:Feedback_loop_with_descriptions.svg" />
-<p> https://en.wikipedia.org/wiki/Control_theory#/media/File:Feedback_loop_with_descriptions.svg 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Feedback_loop_with_descriptions.svg/400px-Feedback_loop_with_descriptions.svg.png" />
+<p> https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Feedback_loop_with_descriptions.svg/400px-Feedback_loop_with_descriptions.svg.png
 PID Controller</p>
-<img src="https://en.wikipedia.org/wiki/PID_controller#/media/File:PID_en.svg" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/PID_en.svg/971px-PID_en.svg.png" />
 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1bcb82541c2fd40dd893d3893e04b4d6b1f02330" />
 <p> Source: https://en.wikipedia.org/wiki/PID_controller </p>
 <p>     The study of control systems is very in depth; so much so that people usually only get PhD’s in certain classes of control systems. There are two main classes of control systems: “open-loop” and “closed loop” control systems. Closed loop control systems use sensors to approximate the state of the system and then send the data from the sensors to the controller so that the controller can adjust the system to a desired state. Errors from the sensors in the state approximation of a closed loop system often send the system into a downward spiral since an error to the controller may result in an erroneous action of the system, leading to an even further sensor errors. This is one of the reasons that a lot of research and mathematics has gone into developing these systems. On the other hand, in open loop systems, there is no feedback from the sensors. Source: https://en.wikipedia.org/wiki/Control_system  </p>
